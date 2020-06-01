@@ -1,8 +1,45 @@
 <html>
-    <head>
-        <title>lesson</title>
-    </head>
-    <body>
-        <div>lesson of vuejs</div>
-    </body>
+
+<head>
+    <title>lesson</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div v-if="seen">{{ message }}</div>
+        <input v-model="message">
+        <button v-on:click="comment">评论</button>
+        <ol>
+            <li v-for="item in list">
+                {{ item.text }} {{item.time}}
+            </li>
+        </ol>
+    </div>
+</body>
+<script>
+    var app = new Vue(
+        {
+            el: '#app',
+            data: {
+                list: [],
+                seen: true,
+                message: 'Hello Vue!!!!!!'
+            },
+            methods: {
+                comment: function () {
+                    console.log('评论按钮点击了' + new Date())
+                    console.log('当前评论：' + this.message)
+                    var new_item = {
+                        text: this.message,
+                        time: new Date()
+                    }
+                    console.log('准备评论数据：', new_item)
+                    this.list.push(new_item)
+                }
+            }
+        }
+    )
+</script>
+
 </html>
